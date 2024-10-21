@@ -9,7 +9,7 @@ To run the project locally, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone git@github.com:KristinaBalashova/react-event-5.git
+    git clone https://github.com/KristinaBalashova/react-event-5
     ```
 2. **Navigate to the project directory:**
     ```bash
