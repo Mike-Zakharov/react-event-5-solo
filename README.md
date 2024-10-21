@@ -6,25 +6,23 @@ This repository is for the React project of Hackathon Team 5.
 
 ### Clone the Repository
 
-Open your terminal and run the following command to clone the repository:
+**Open your terminal and run the following command to clone the repository:**
 
-````bash
 git clone git@github.com:KristinaBalashova/react-event-5.git
 cd react-event-5
 npm install
 
 ### Start Development Server
 
-Open your terminal and run the following command to clone the repository:
+**Open your terminal and run the following command to clone the repository:**
 
-```bash
 npm run dev
 
 
 ### Code Quality and Formatting
-To ensure the project follows the code style and maintains code quality, use:
+**To ensure the project follows the code style and maintains code quality, use:**
 
-```bash
+
 npm run lint
 npm run format
-````
+
