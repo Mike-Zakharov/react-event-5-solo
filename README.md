@@ -1,13 +1,30 @@
-<<<<<<< HEAD
-# react-event-5
-The repository is for react project hackathon team 5
-=======
-# React + Vite
+# React Project Hackathon Team 5
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is for the React project of Hackathon Team 5.
 
-Currently, two official plugins are available:
+## Team
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
->>>>>>> eb1b6b7 (Initial: Set up repository)
+### Clone the Repository
+
+Open your terminal and run the following command to clone the repository:
+
+````bash
+git clone git@github.com:KristinaBalashova/react-event-5.git
+cd react-event-5
+npm install
+
+### Start Development Server
+
+Open your terminal and run the following command to clone the repository:
+
+```bash
+npm run dev
+
+
+### Code Quality and Formatting
+To ensure the project follows the code style and maintains code quality, use:
+
+```bash
+npm run lint
+npm run format
+````
