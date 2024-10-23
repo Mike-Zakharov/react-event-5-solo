@@ -12,6 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -45,6 +46,7 @@ export default function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+    <ThemeSwitcher> {/* Оборачиваем в новый компонент для переключения темы */}
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar component="nav">
@@ -128,5 +130,6 @@ export default function DrawerAppBar(props) {
         </Typography>
       </Box>
     </Box>
+    </ThemeSwitcher>
   );
 }
