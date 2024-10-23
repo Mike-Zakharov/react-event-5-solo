@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { AppBar } from './сomponents/AppBar';
+import AppBar  from './components/AppBar';
 function App() {
 
   return (
