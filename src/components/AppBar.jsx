@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ThemeSwitcher from './ThemeSwitcher';
 import FormComponent from './FormComponent';
+import { DialogModal } from './DialogModal';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -113,6 +114,8 @@ export default function DrawerAppBar(props) {
         </CssBaseline>
       </Box>
       <FormComponent />
+      {/* Адаптивное модальное окно для подписки на рассылку */}
+      <DialogModal />
     </ThemeSwitcher>
   );
 }
