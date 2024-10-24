@@ -1,20 +1,23 @@
 import React from "react";
 import { useCat } from "./store";
-
+import {Box, Button, CircularProgress} from '@mui/material';
 
 const Block = () => {
     let cat = useCat(store => store.cat);
     const getACat = useCat(store => store.getACat)
-    console.log(cat);
-    const changeCat = () => {
-        
-        getACat()
-    }
+
     return (
-        <div>
-           <img src={cat}  alt="cat" style={{width:200 + 'px', height: 200 + 'px'}}/>
-           <button onClick={changeCat}>click</button>
-        </div>
+        <Box sx={{ display: 'flex',
+            flexDirection:'column', alignItems: 'center',
+             width:'300px', height: '400px', m: '0 auto', mt:'25px' }}>
+            <img src={cat}  alt="cat" style={{maxWidth:300 + 'px', height: 300 + 'px'}}/>
+            
+            <Button 
+                onClick={()=> getACat()}
+                variant="outlined"
+                sx={{mt:'25px',width: '120px'}}
+            >Click Me!</Button>
+        </Box>
     )
 }
 
