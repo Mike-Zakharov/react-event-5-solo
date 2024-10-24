@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import './App.css';
-import AppBar  from './components/AppBar';
-function App() {
+import AppBar from './components/AppBar';
 
+function App() {
   return (
     <>
       <AppBar />
