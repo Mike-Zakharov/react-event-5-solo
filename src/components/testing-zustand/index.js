@@ -1,3 +1,3 @@
-import Block from "./block";
+import RandomCatBlock from './block.jsx';
 
-export default Block;
+export default RandomCatBlock;
