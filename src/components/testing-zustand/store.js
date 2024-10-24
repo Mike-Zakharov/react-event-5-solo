@@ -12,9 +12,7 @@ export  const useCat = create((set,get) => ({
                 return item.url
             })
             console.log(url);
-            set({cat: url})
-            
-                  
+            set({cat: url})       
         }catch{
 
         }

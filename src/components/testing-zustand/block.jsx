@@ -1,8 +1,8 @@
 import React from "react";
 import { useCat } from "./store";
-import {Box, Button, CircularProgress} from '@mui/material';
+import {Box, Button,} from '@mui/material';
 
-const Block = () => {
+const RandomCatBlock = () => {
     let cat = useCat(store => store.cat);
     const getACat = useCat(store => store.getACat)
 
