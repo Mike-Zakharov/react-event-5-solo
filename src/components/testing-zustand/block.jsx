@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCat } from './store';
+import useCat  from './store.js';
 import { Box, Button } from '@mui/material';
 
 const RandomCatBlock = () => {
