@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useUserData from '../store/store';
 import AuthForm from '../components/AuthForm/AuthForm';
 import useAuth from '../hooks/useAuth';
+import { useAuthContext } from '../context/AuthContext';
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const { authenticate, loading, error } = useAuth();
-  const setAuth = useUserData((state) => state.useAuth);
-  const setToken = useUserData((state) => state.useToken);
+  const { login, auth } = useAuthContext();
+
+  console.log(auth, 'auth');
 
   const onSubmit = async (formData) => {
     const authData = await authenticate(formData);
     if (authData) {
-      setAuth(authData.auth);
-      setToken(authData.token);
+      console.log(authData, 'data for auth');
+      login(authData.token);
       navigate('/catalogue');
     }
   };
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/catalogue');
+    }
+  }, [auth, navigate]);
 
   return (
     <>
