@@ -51,6 +51,7 @@ const AuthForm = ({ onSubmit }) => {
       <TextField
         label="Логин"
         variant="outlined"
+        InputLabelProps={{ shrink: true }}
         placeholder="Введите e-mail"
         {...register('username', { required: 'Введите корректный e-mail адрес' })}
         error={!!errors.username}
@@ -62,6 +63,7 @@ const AuthForm = ({ onSubmit }) => {
       <TextField
         label="Пароль"
         variant="outlined"
+        InputLabelProps={{ shrink: true }}
         placeholder="Введите пароль"
         type={showPassword ? 'text' : 'password'}
         {...register('password', { required: 'Введите корректный пароль' })}
