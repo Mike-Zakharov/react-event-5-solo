@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/LoginPage.jsx';
+import LoginPage from './pages/AuthPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import HelpRequestPage from './pages/HelpRequestPage.jsx';
 import CatalogPage from './pages/CatalogPage.jsx';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
+import AuthPage from './pages/AuthPage.jsx';
 import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import './App.css';
@@ -36,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <HelpRequestPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/auth"
+            element={
+              <ProtectedRoute>
+                <AuthPage />
               </ProtectedRoute>
             }
           />
