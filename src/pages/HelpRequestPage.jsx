@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Icon, Paper, Typography } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import useUserData from '../store/store';
 
 const HelpRequestPage = () => {
   const { itemId } = useParams();
@@ -19,7 +20,9 @@ const HelpRequestPage = () => {
           </Paper>
         </Paper>  
        : <p>Page item is not present</p>}
+      {itemId ? <div>HelpRequestPage with itemId: {itemId}</div> : <p>Page item is not present</p>}
     </>
   );
 };
+
 export default HelpRequestPage;

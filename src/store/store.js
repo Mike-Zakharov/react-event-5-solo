@@ -1,31 +1,42 @@
 import { create } from 'zustand';
-// import currentUrl from ''
+
 const useUserData = create((set) => ({
-    userData: [],
-    auth: true,
-    token: '',
-    error: null,
-    loading: false,
-    fetchUserData: async () => {
-        set({loading: true})
-        // запрос к бэку, адрес надо правильный сделать
-        try{
-            if(auth){
-                const response = await fetch('http://localhost:4040/api/user')
-                if(!response.ok) set({error: true})
-                let responseData = await response.json();
-                set({userData: responseData, error: false})
-            }
-
-        }catch(error){
-            set({error: true})
-        }finally{
-            set({loading: false})
+  userData: [],
+  auth: false,
+  token: '',
+  error: null,
+  loading: false,
+  useAuth: (newAuth) => {
+    
+    
+    set({ auth: newAuth }, true)
+  },
+  fetchAuthAndToken: async () => {
+    try {
+        const response = await fetch(`https://natticharity.eveloth.ru/api/auth`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.message || 'Authentication failed');
         }
+  
+        const authData = await response.json();
+        console.log(authData, 'authData');
+        set({auth:authData.auth , token: authData.token }, true)
+      } catch (err) {
+        setError(err.message);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    
     },
-    useAuth: (state)=> set({auth: !state.auth}),
-    useToken: (token) => set({token: token})
-
-}))
+}));
 
 export default useUserData;
