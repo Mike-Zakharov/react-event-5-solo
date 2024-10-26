@@ -1,11 +1,8 @@
 import { Box, Link, Toolbar, Typography } from '@mui/material';
 import { MainContainer } from '../container/MainContainer';
-import useUserData from '../../store/store';
+
 
 export const Footer = () => {
-
-  const token = useUserData((state) => state.token)
-  console.log(token);
   
   return (
     <Box component="footer" sx={{ borderTop: '1px solid #e0e0e0' }}>

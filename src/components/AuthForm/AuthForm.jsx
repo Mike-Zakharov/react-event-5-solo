@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, Box, Typography, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import fetchAuthAndToken from '../../store/store'
 
 const AuthForm = ({ onSubmit }) => {
   const {
@@ -75,7 +74,7 @@ const AuthForm = ({ onSubmit }) => {
       />
 
       {/* Кнопка входа */}
-      <Button onClick={fetchAuthAndToken()}  type="submit" variant="contained" color="primary" fullWidth>
+      <Button  type="submit" variant="contained" color="primary" fullWidth>
         Войти
       </Button>
     </Box>
