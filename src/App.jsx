@@ -7,12 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import './App.css';
-import useUserData from './store/store';
 
 function App() {
-  const userData = useUserData(state=> state.userData)
-  console.log(userData);
-  
   return (
     <BrowserRouter>
       <Header />
