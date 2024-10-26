@@ -1,14 +1,7 @@
 // src/components/AuthForm.js
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  IconButton,
-  InputAdornment,
-} from '@mui/material';
+import { TextField, Button, Box, Typography, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const AuthForm = ({ onSubmit }) => {
@@ -43,7 +36,7 @@ const AuthForm = ({ onSubmit }) => {
         backgroundColor: 'background.paper',
       }}
     >
-      <Typography variant="h5" align="left" gutterBottom color='#212121'>
+      <Typography variant="h5" align="left" gutterBottom color="#212121">
         Вход
       </Typography>
 
