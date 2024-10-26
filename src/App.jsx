@@ -7,7 +7,6 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
-import './App.css';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 
 function App() {
