@@ -1,9 +1,16 @@
 import { Box, Typography } from '@mui/material';
+import useFetch from '../hooks/useFetch';
 import { UserInfoCard } from '../components/UserInfoCard/UserInfoCard';
 import { ProfileTabs } from '../components/tabs/ProfileTabs';
 import { MainContainer } from '../components/container/MainContainer';
+import { useAuthContext } from '../context/AuthContext';
 
 const ProfilePage = () => {
+  const { token } = useAuthContext();
+  const { data, loading, error } = useFetch(token, 'user');
+
+  console.log(data);
+
   return (
     <Box component="section">
       <MainContainer>
@@ -13,7 +20,7 @@ const ProfilePage = () => {
           </Typography>
           <Box sx={{ display: 'flex', gap: 2.5 }}>
             <UserInfoCard />
-            <ProfileTabs />
+            <ProfileTabs userData={data} />
           </Box>
         </Box>
       </MainContainer>
