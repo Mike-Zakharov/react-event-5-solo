@@ -1,31 +1,13 @@
 import { create } from 'zustand';
-// import currentUrl from ''
+
 const useUserData = create((set) => ({
-    userData: [],
-    auth: true,
-    token: '',
-    error: null,
-    loading: false,
-    fetchUserData: async () => {
-        set({loading: true})
-        // запрос к бэку, адрес надо правильный сделать
-        try{
-            if(auth){
-                const response = await fetch('http://localhost:4040/api/user')
-                if(!response.ok) set({error: true})
-                let responseData = await response.json();
-                set({userData: responseData, error: false})
-            }
-
-        }catch(error){
-            set({error: true})
-        }finally{
-            set({loading: false})
-        }
-    },
-    useAuth: (state)=> set({auth: !state.auth}),
-    useToken: (token) => set({token: token})
-
-}))
+  userData: [],
+  auth: false,
+  token: '',
+  error: null,
+  loading: false,
+  useAuth: (newAuth) => set({ auth: newAuth }),
+  useToken: (newToken) => set({ token: newToken }),
+}));
 
 export default useUserData;

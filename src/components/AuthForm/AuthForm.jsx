@@ -1,4 +1,3 @@
-// src/components/AuthForm.js
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, Box, Typography, IconButton, InputAdornment } from '@mui/material';
@@ -46,9 +45,9 @@ const AuthForm = ({ onSubmit }) => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         placeholder="Введите e-mail"
-        {...register('username', { required: 'Введите корректный e-mail адрес' })}
-        error={!!errors.username}
-        helperText={errors.username ? errors.username.message : ''}
+        {...register('login', { required: 'Введите корректный e-mail адрес' })} // Изменено на 'login'
+        error={!!errors.login} // Изменено на 'login'
+        helperText={errors.login ? errors.login.message : ''} // Изменено на 'login'
         fullWidth
       />
 
