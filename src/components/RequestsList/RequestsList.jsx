@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
-import { Box, Typography, Pagination } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Grid2 as Grid,
+  Pagination,
+  CircularProgress,
+} from '@mui/material';
 import useFetch from '../../hooks/useFetch.js';
 import RequestCard from '../RequestCard/RequestCard.jsx';
 
 const pageSize = 3;
 
-const RequestsList = ({ data }) => {
+const RequestsList = ({ data, variant }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
@@ -26,59 +34,59 @@ const RequestsList = ({ data }) => {
     <Box
       sx={{
         backgroundColor: 'white',
-        border: '1px solid #E0E0E0',
-        borderRadius: '2px',
-        padding: '20px',
+        border: variant === 'catalog' ? '1px solid #E0E0E0' : 'none',
+        borderRadius: '4px',
+        padding: variant === 'catalog' ? '20px' : 0,
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography
-          variant="h4"
-          component="h2"
-          gutterBottom
+      {variant === 'catalog' && (
+        <Box
           sx={{
-            fontSize: '20px',
-            fontWeight: 600,
-            lineHeight: '32px',
-            letterSpacing: '0.15px',
-            textAlign: 'left',
-            color: 'black',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
-          Найдено {data ? data.length : 0} запросов
-        </Typography>
-        <ToggleButtons />
-      </Box>
+          <Typography
+            variant="h4"
+            component="h2"
+            gutterBottom
+            sx={{
+              fontSize: '20px',
+              fontWeight: 600,
+              lineHeight: '32px',
+              letterSpacing: '0.15px',
+              textAlign: 'left',
+              color: 'black',
+            }}
+          >
+            Найдено {data ? data.length : 0} запросов
+          </Typography>
+          <ToggleButtons />
+        </Box>
+      )}
 
-      <Box
-        sx={{
-          display: 'flex',
-          gap: '20px',
-          margin: '20px 0px 30px 0px',
-        }}
-      >
-        {data.slice(0, 3).map((request, index) => (
-          <RequestCard
-            key={index}
-            variant="full"
-            image="src/assets/image-card.svg"
-            title={request?.title.split(']')[1] || ''}
-            organization={request?.organization?.title || ''}
-            location={request?.location || ''}
-            goalDescription={request?.goalDescription || ''}
-            endingDate={request?.endingDate.split('T')[0].split('-').reverse().join('.') || ''}
-            requestGoalCurrentValue={request?.requestGoalCurrentValue || 0}
-            requestGoal={request?.requestGoal || 0}
-            contributorsCount={request?.contributorsCount || 0}
-          />
-        ))}
-      </Box>
+      <Grid container spacing={3} sx={{
+        margin: '20px 0px 30px 0px',
+      }}>
+        {data
+            .slice(0, 3)
+            .map((request, index) => (
+              <RequestCard
+                key={index}
+                variant="full"
+                image="src/assets/image-card.svg"
+                title={request?.title.split(']')[1] || ''}
+                organization={request?.organization?.title || ''}
+                location={request?.location || ''}
+                goalDescription={request?.goalDescription || ''}
+                endingDate={request?.endingDate.split('T')[0].split('-').reverse().join('.') || ''}
+                requestGoalCurrentValue={request?.requestGoalCurrentValue || 0}
+                requestGoal={request?.requestGoal || 0}
+                contributorsCount={request?.contributorsCount || 0}
+              />
+            ))}
+      </Grid>
 
       {/* Pagination block */}
       <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'center' }}>

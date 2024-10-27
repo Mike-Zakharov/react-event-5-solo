@@ -31,7 +31,7 @@ const CatalogPage = () => {
         }}
       >
         <Search />
-        {data && <RequestsList data={data} />}
+        {data && <RequestsList data={data}  variant={'catalog'}/>}
       </Box>
     </Box>
   );
