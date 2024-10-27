@@ -6,7 +6,8 @@ import FilterPanel from '../components/FilterPanel/FilterPanel';
 import useFetch from '../hooks/useFetch';
 
 const CatalogPage = () => {
-  const { data } = useFetch('/request');
+  const { data, loading, error } = useFetch('/request');
+  console.log(data, 'data');
 
   return (
     <Box

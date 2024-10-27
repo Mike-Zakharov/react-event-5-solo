@@ -30,7 +30,7 @@ const ToggleButtons = () => {
             borderLeft: index > 0 ? '2px solid rgba(0, 0, 0, 0.08)' : 'none',
             cursor: 'pointer',
             padding: 0,
-            minWidth: '0px'
+            minWidth: '0px',
           }}
         >
           <img src={button.url} alt={button.label} style={{ width: '20px', height: '20px' }} />
