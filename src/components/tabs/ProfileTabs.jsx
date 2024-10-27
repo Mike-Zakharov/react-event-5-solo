@@ -23,16 +23,40 @@ function a11yProps(index) {
   };
 }
 
+function formatBirthdate(birthdate) {
+  const date = new Date(birthdate);
+
+  return date.toLocaleDateString('ru-RU', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+}
+
 const subtitleStyle = {
   mb: 1.25,
+};
+
+const listWrapStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
 };
 
 const listStyle = {
   p: 0,
 };
 
+const itemStyle = {
+  display: 'flex',
+  alignItems: 'baseline',
+  gap: '4px',
+  m: 0,
+};
+
 export const ProfileTabs = ({ userData }) => {
   const [value, setValue] = useState(0);
+  const formattedBirthdate = formatBirthdate(userData?.birthdate);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
@@ -48,69 +72,99 @@ export const ProfileTabs = ({ userData }) => {
         </Tabs>
       </Box>
       <ProfilePanel value={value} index={0}>
-        <Typography variant="h6" component="h3">
-          Профиль
-        </Typography>
-        <List>
-          <ListItem>
-            <ListItemText primary="Фамилия:" secondary={userData?.lastName} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Имя:" secondary={userData?.name} />
-          </ListItem>
-        </List>
-
-        <Typography variant="h6" component="h3">
-          Дата рождения
-        </Typography>
-        <List>
-          <ListItem>
-            <ListItemText secondary={userData?.birthdate} />
-          </ListItem>
-        </List>
-
-        <Typography variant="h6" component="h3">
-          Локация для помощи
-        </Typography>
-        {userData?.baseLocations.map((data) => (
-          <List key={uuidv4()}>
-            <ListItem>
-              <ListItemText primary="Область:" secondary={data.district} />
+        <Box>
+          <Typography variant="h6" component="h3" sx={subtitleStyle}>
+            Профиль
+          </Typography>
+          <List sx={listStyle}>
+            <ListItem disablePadding>
+              <ListItemText primary="Фамилия:" secondary={userData?.lastName} sx={itemStyle} />
             </ListItem>
-            <ListItem>
-              <ListItemText primary="Насленный пункт:" secondary={data.city} />
+            <ListItem disablePadding>
+              <ListItemText primary="Имя:" secondary={userData?.name} sx={itemStyle} />
             </ListItem>
           </List>
-        ))}
+        </Box>
 
-        <Typography variant="h6" component="h3">
-          Образование
-        </Typography>
-        {userData?.educations.map((data) => (
-          <List key={uuidv4()}>
-            <ListItem>
-              <ListItemText primary="Учреждение:" secondary={data.organizationName} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Уровень образования:" secondary={data.level} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Специализация:" secondary={data.specialization} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Год окончания:" secondary={data.graduationYear} />
+        <Box>
+          <Typography variant="h6" component="h3" sx={subtitleStyle}>
+            Дата рождения
+          </Typography>
+          <List sx={listStyle}>
+            <ListItem disablePadding>
+              <ListItemText secondary={formattedBirthdate} sx={itemStyle} />
             </ListItem>
           </List>
-        ))}
+        </Box>
 
-        <Typography variant="h6" component="h3">
-          Обо мне
-        </Typography>
-        <List>
-          <ListItem>
-            <ListItemText secondary={userData?.additionalInfo} />
-          </ListItem>
-        </List>
+        <Box>
+          <Typography variant="h6" component="h3" sx={subtitleStyle}>
+            Локация для помощи
+          </Typography>
+          <Box sx={listWrapStyle}>
+            {userData?.baseLocations.map((data) => (
+              <List key={uuidv4()} sx={listStyle}>
+                <ListItem disablePadding>
+                  <ListItemText primary="Область:" secondary={data.district} sx={itemStyle} />
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemText primary="Насленный пункт:" secondary={data.city} sx={itemStyle} />
+                </ListItem>
+              </List>
+            ))}
+          </Box>
+        </Box>
+
+        <Box>
+          <Typography variant="h6" component="h3" sx={subtitleStyle}>
+            Образование
+          </Typography>
+          <Box sx={listWrapStyle}>
+            {userData?.educations.map((data) => (
+              <List key={uuidv4()} sx={listStyle}>
+                <ListItem disablePadding>
+                  <ListItemText
+                    primary="Учреждение:"
+                    secondary={data.organizationName}
+                    sx={itemStyle}
+                  />
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemText
+                    primary="Уровень образования:"
+                    secondary={data.level}
+                    sx={itemStyle}
+                  />
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemText
+                    primary="Специализация:"
+                    secondary={data.specialization}
+                    sx={itemStyle}
+                  />
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemText
+                    primary="Год окончания:"
+                    secondary={data.graduationYear}
+                    sx={itemStyle}
+                  />
+                </ListItem>
+              </List>
+            ))}
+          </Box>
+        </Box>
+
+        <Box>
+          <Typography variant="h6" component="h3" sx={subtitleStyle}>
+            Обо мне
+          </Typography>
+          <List sx={listStyle}>
+            <ListItem disablePadding>
+              <ListItemText secondary={userData?.additionalInfo} sx={itemStyle} />
+            </ListItem>
+          </List>
+        </Box>
       </ProfilePanel>
 
       <ProfilePanel value={value} index={1}>
@@ -192,6 +246,7 @@ export const ProfileTabs = ({ userData }) => {
           </List>
         </Box>
       </ProfilePanel>
+
       <ProfilePanel value={value} index={2}>
         Избранное
       </ProfilePanel>
