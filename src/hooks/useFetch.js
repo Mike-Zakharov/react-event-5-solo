@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useStore } from '../store/userStore';
+import { useAuthContext } from '../context/AuthContext.jsx';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -7,8 +7,7 @@ const useFetch = (path) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const storedToken = useStore((state) => state.token);
-  const authToken = storedToken;
+  const { token, login } = useAuthContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,12 +17,31 @@ const useFetch = (path) => {
         const response = await fetch(url, {
           method: 'GET',
           headers: {
-            Authorization: authToken ? `Bearer ${authToken}` : undefined,
+            Authorization: token ? `Bearer ${token}` : undefined,
             'Content-Type': 'application/json',
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          if (response.status === 401) {
+            // Обработка ошибки 401 (Unauthorized) - обновление токена
+            console.log('обновление токена');
+            const refreshResponse = await fetch(`${API_BASE_URL}/refresh_token`, {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+            });
+            if (refreshResponse.ok) {
+              const newToken = await refreshResponse.json();
+              login(newToken); // Обновляем токен в контексте
+              fetchData(); // Повторно отправляем запрос с новым токеном
+            } else {
+              throw new Error('Failed to refresh token');
+            }
+          } else {
+            throw new Error('Network response was not ok');
+          }
         }
         const result = await response.json();
         setData(result);
@@ -33,13 +51,13 @@ const useFetch = (path) => {
         setLoading(false);
       }
     };
-    if (authToken) {
+    if (token) {
       fetchData();
     } else {
       setLoading(false);
       setError(new Error('No token available'));
     }
-  }, [path, authToken]);
+  }, [path, token]);
 
   return { data, loading, error };
 };
