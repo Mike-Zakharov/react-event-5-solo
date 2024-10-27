@@ -14,10 +14,7 @@ import RequestCard from '../RequestCard/RequestCard.jsx';
 
 const pageSize = 3;
 
-// variant = "favourites" | "catalog"
-const RequestsList = ({ variant }) => {
-  const { data, loading, error } = useFetch('/request');
-  console.log(data, 'data ');
+const RequestsList = ({ data, variant }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
@@ -69,9 +66,10 @@ const RequestsList = ({ variant }) => {
         </Box>
       )}
 
-      <Grid container spacing={3}>
-        {data &&
-          data
+      <Grid container spacing={3} sx={{
+        margin: '20px 0px 30px 0px',
+      }}>
+        {data
             .slice(0, 3)
             .map((request, index) => (
               <RequestCard
@@ -92,7 +90,7 @@ const RequestsList = ({ variant }) => {
 
       {/* Pagination block */}
       <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'center' }}>
-        {data && <Pagination count={10} page={1} onChange={handlePageChange} />}
+        <Pagination count={10} page={1} onChange={handlePageChange} />
       </Box>
     </Box>
   );
