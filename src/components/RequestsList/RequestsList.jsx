@@ -16,6 +16,7 @@ const pageSize = 3;
 
 const RequestsList = () => {
   const { data, loading, error } = useFetch('/request');
+  console.log(data, 'data ');
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
