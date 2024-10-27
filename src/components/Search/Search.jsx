@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { TextField, Typography, Box, InputAdornment } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+
+  // Получаем значение поиска из строки запроса
+  const initialSearchQuery = new URLSearchParams(location.search).get('search') || '';
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
+
+  useEffect(() => {
+    // Обновляем searchQuery, если строка запроса изменяется извне
+    setSearchQuery(initialSearchQuery);
+  }, [location.search]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
