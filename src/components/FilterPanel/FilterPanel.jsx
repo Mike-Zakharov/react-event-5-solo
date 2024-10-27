@@ -1,31 +1,42 @@
-import React, { useState } from 'react';
-import { Box, Typography, Button, FormControl, FormLabel, TextField } from '@mui/material';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import { useNavigate, useLocation } from 'react-router-dom';
+import DatePickerComponent from '../DatePickerComponent/DatePickerComponent';
+import extractUniqueFilters from '../../utils/extractUniqueFilters';
+
+const requests = [
+  {
+    id: 'request-id-1',
+    requesterType: 'person',
+    helpType: 'finance',
+    helperRequirements: {
+      helperType: 'group',
+      isOnline: true,
+      qualification: 'professional',
+    },
+  },
+  {
+    id: 'request-id-2',
+    requesterType: 'organization',
+    helpType: 'donation',
+    helperRequirements: {
+      helperType: 'individual',
+      isOnline: false,
+      qualification: 'amateur',
+    },
+  },
+];
 
 const FilterPanel = ({ data }) => {
-  const [selectedDate, setselectedDate] = [];
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleFilterChange = (event) => {
-    const { name, value } = event.target;
-    if (value === '*') {
-      deleteQuery(name, location, navigate);
-    } else {
-      setQuery(name, value, location, navigate);
-    }
-  };
+  const { helpType, helperRequirements, requesterType } = extractUniqueFilters(requests);
 
+  const { helperType, isOnline, qualification } = helperRequirements;
   const handleFilterClear = () => {
-    const searchParams = new URLSearchParams(location.search);
-    Object.keys(data).forEach((filter) => {
-      searchParams.delete(filter);
-    });
-    navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
+    navigate(`${location.pathname}`, { replace: true });
   };
 
   return (
@@ -56,7 +67,8 @@ const FilterPanel = ({ data }) => {
       </Typography>
 
       <Box>
-        <CheckboxGroup options={['option1', 'option2']} label="Some label" />
+        <CheckboxGroup options={requesterType} label="Комy мы помогаем" key={'requesterType'} />
+        <CheckboxGroup options={helpType} label="Чем мы помогаем" key={'helpType'} />
       </Box>
 
       <Typography
@@ -67,36 +79,12 @@ const FilterPanel = ({ data }) => {
       </Typography>
 
       <Box sx={{ backgroundColor: '#f0f0f0', padding: '12px 42px' }}>
-        <CheckboxGroup options={['option1', 'option2']} label="Some label" />
-        <CheckboxGroup options={['option1', 'option2']} label="Some label" />
-        {/* map volunteers list */}
+        <CheckboxGroup options={qualification} label="Специализация" key={'qualification'} />
+        <CheckboxGroup options={isOnline} label="Формат" key={'isOnline'} />
+        <CheckboxGroup options={helperType} label="Необходимо волонтеров" key={'helperType'} />
       </Box>
 
-      <Box sx={{ marginTop: 2, marginBottom: '40px' }}>
-        <Typography
-          variant="subtitle1"
-          sx={{
-            fontFamily: 'Roboto',
-            fontSize: '16px',
-            fontWeight: 400,
-            lineHeight: '24px',
-            letterSpacing: '0.15px',
-            textAlign: 'left',
-            color: 'rgba(0, 0, 0, 0.6)',
-            paddingBottom: '10px',
-          }}
-        >
-          Помощь актуальна до:
-        </Typography>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DesktopDatePicker
-            label="Выберите дату"
-            value={selectedDate}
-            onChange={(newValue) => setSelectedDate(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth />}
-          />
-        </LocalizationProvider>
-      </Box>
+      <DatePickerComponent />
 
       <Button
         variant="outlined"
