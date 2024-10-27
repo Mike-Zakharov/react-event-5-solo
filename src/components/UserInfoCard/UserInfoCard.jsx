@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 import avatar from '../../assets/avatar.svg';
 
-export const UserInfoCard = () => {
+export const UserInfoCard = ({ userData }) => {
   const { auth, logout } = useAuthContext();
   const navigate = useNavigate();
 
@@ -28,22 +28,18 @@ export const UserInfoCard = () => {
       <Card
         variant="outlined"
         sx={{
-          paddingBlock: 2.5,
-          maxHeight: 420,
           borderRadius: 1,
         }}
       >
-        <CardMedia sx={{ p: '20px 53px' }}>
+        <CardMedia sx={{ p: '40px 53px' }}>
           <img src={avatar} alt="" />
         </CardMedia>
         <Divider />
-        <CardContent sx={{ mb: '30px', p: 2.5, textAlign: 'left' }}>
+        <CardContent sx={{ p: 2.5, textAlign: 'left' }}>
           <Typography variant="h6" sx={{ mb: '10px' }}>
-            Ангелина Фомина
+            {`${userData?.name} ${userData?.lastName}`}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Статус: Начинающий
-          </Typography>
+          <Typography variant="body2">{`Статус: ${userData?.status}`}</Typography>
         </CardContent>
         <CardActions sx={{ p: 2.5 }}>
           <Button
