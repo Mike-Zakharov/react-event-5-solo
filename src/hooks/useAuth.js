@@ -11,7 +11,7 @@ const useAuth = () => {
     setError(null);
 
     try {
-      const response = await fetch(`https://natticharity.eveloth.ru/api/auth`, {
+      const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
