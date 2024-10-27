@@ -45,7 +45,12 @@ const AuthForm = ({ onSubmit }) => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         placeholder="Введите e-mail"
-        {...register('login', { required: 'Введите корректный e-mail адрес' })} // Изменено на 'login'
+        {...register('login', { required: 'Введите корректный e-mail адрес',
+        pattern: {
+          value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+          message: 'Введите корректный e-mail'
+        } 
+       })} // Изменено на 'login'
         error={!!errors.login} // Изменено на 'login'
         helperText={errors.login ? errors.login.message : ''} // Изменено на 'login'
         fullWidth
