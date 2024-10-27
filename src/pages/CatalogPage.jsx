@@ -1,3 +1,4 @@
+//import RequestsList from '../components/RequestsList/RequestsList';
 import React, { useEffect } from 'react';
 import RequestsList from '../components/RequestsList/RequestsList';
 import Search from '../components/Search/Search';
@@ -6,7 +7,8 @@ import FilterPanel from '../components/FilterPanel/FilterPanel';
 import useFetch from '../hooks/useFetch';
 
 const CatalogPage = () => {
-  const { data } = useFetch('/request');
+  const { data, loading, error } = useFetch('/request');
+  console.log(data, 'data');
 
   return (
     <Box
@@ -31,7 +33,7 @@ const CatalogPage = () => {
         }}
       >
         <Search />
-        <RequestsList />
+        <RequestsList variant={'catalog'} />
       </Box>
     </Box>
   );

@@ -13,11 +13,11 @@ const AuthPage = () => {
   const { authenticate, loading, error } = useAuth();
   const { login, logout, auth } = useAuthContext();
 
-  console.log(auth, 'auth');
-
   const onSubmit = async (formData) => {
     const authData = await authenticate(formData);
     if (authData) {
+      console.log(authData.auth, authData.token);
+
       console.log(authData, 'data for auth');
       login(authData.token);
       navigate('/catalog');
