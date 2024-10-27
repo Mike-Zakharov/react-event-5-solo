@@ -9,12 +9,10 @@ const Search = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // Получаем значение поиска из строки запроса
   const initialSearchQuery = new URLSearchParams(location.search).get('search') || '';
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
 
   useEffect(() => {
-    // Обновляем searchQuery, если строка запроса изменяется извне
     setSearchQuery(initialSearchQuery);
   }, [location.search]);
 
