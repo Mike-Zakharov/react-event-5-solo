@@ -3,13 +3,9 @@ import useFetch from '../hooks/useFetch';
 import { UserInfoCard } from '../components/UserInfoCard/UserInfoCard';
 import { ProfileTabs } from '../components/tabs/ProfileTabs';
 import { MainContainer } from '../components/container/MainContainer';
-import { useAuthContext } from '../context/AuthContext';
 
 const ProfilePage = () => {
-  const { token } = useAuthContext();
-  const { data, loading, error } = useFetch(token, 'user');
-
-  console.log(data);
+  const { data } = useFetch('/user');
 
   return (
     <Box component="section">
