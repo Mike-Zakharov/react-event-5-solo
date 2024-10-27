@@ -12,9 +12,7 @@ This repository is for the React project of Hackathon Team 5.
 
 ## Deploy
 
-- Production: https://react-event-5.vercel.app/
-
-- Development: https://react-event-5-git-develop-kristinabalashovas-projects.vercel.app/
+- https://react-event-5.pages.dev/catalog
 
 ## Technology Stack
 
