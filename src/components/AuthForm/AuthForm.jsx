@@ -10,10 +10,8 @@ const AuthForm = ({ onSubmit }) => {
     formState: { errors },
   } = useForm();
 
-  // Состояние для отображения/скрытия пароля
   const [showPassword, setShowPassword] = useState(false);
 
-  // Функция переключения видимости пароля
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
@@ -50,9 +48,9 @@ const AuthForm = ({ onSubmit }) => {
           value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
           message: 'Введите корректный e-mail'
         } 
-       })} // Изменено на 'login'
-        error={!!errors.login} // Изменено на 'login'
-        helperText={errors.login ? errors.login.message : ''} // Изменено на 'login'
+       })} 
+        error={!!errors.login} 
+        helperText={errors.login ? errors.login.message : ''} 
         fullWidth
       />
 
