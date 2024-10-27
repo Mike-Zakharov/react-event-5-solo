@@ -1,22 +1,12 @@
 import { useState, useEffect } from 'react';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  Pagination,
-  CircularProgress,
-} from '@mui/material';
+import { Box, Typography, Pagination } from '@mui/material';
 import useFetch from '../../hooks/useFetch.js';
 import RequestCard from '../RequestCard/RequestCard.jsx';
 
 const pageSize = 3;
 
-const RequestsList = () => {
-  const { data, loading, error } = useFetch('/request');
-  console.log(data, 'data ');
+const RequestsList = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (event, value) => {
@@ -66,30 +56,33 @@ const RequestsList = () => {
         <ToggleButtons />
       </Box>
 
-      <Grid container spacing={2}>
-        {data &&
-          data
-            .slice(0, 3)
-            .map((request, index) => (
-              <RequestCard
-                key={index}
-                variant="full"
-                image="src/assets/image-card.svg"
-                title={request?.title.split(']')[1] || ''}
-                organization={request?.organization?.title || ''}
-                location={request?.location || ''}
-                goalDescription={request?.goalDescription || ''}
-                endingDate={request?.endingDate.split('T')[0].split('-').reverse().join('.') || ''}
-                requestGoalCurrentValue={request?.requestGoalCurrentValue || 0}
-                requestGoal={request?.requestGoal || 0}
-                contributorsCount={request?.contributorsCount || 0}
-              />
-            ))}
-      </Grid>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '20px',
+          margin: '20px 0px 30px 0px',
+        }}
+      >
+        {data.slice(0, 3).map((request, index) => (
+          <RequestCard
+            key={index}
+            variant="full"
+            image="src/assets/image-card.svg"
+            title={request?.title.split(']')[1] || ''}
+            organization={request?.organization?.title || ''}
+            location={request?.location || ''}
+            goalDescription={request?.goalDescription || ''}
+            endingDate={request?.endingDate.split('T')[0].split('-').reverse().join('.') || ''}
+            requestGoalCurrentValue={request?.requestGoalCurrentValue || 0}
+            requestGoal={request?.requestGoal || 0}
+            contributorsCount={request?.contributorsCount || 0}
+          />
+        ))}
+      </Box>
 
       {/* Pagination block */}
       <Box sx={{ marginTop: 2, display: 'flex', justifyContent: 'center' }}>
-        {data && <Pagination count={10} page={1} onChange={handlePageChange} />}
+        <Pagination count={10} page={1} onChange={handlePageChange} />
       </Box>
     </Box>
   );

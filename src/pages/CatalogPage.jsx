@@ -21,9 +21,7 @@ const CatalogPage = () => {
         maxWidth: '1500px',
       }}
     >
-      <Box sx={{ flexBasis: '25%', flexShrink: 0 }}>
-        <FilterPanel data={data} />
-      </Box>
+      <Box sx={{ flexBasis: '25%', flexShrink: 0 }}>{data && <FilterPanel data={data} />}</Box>
       <Box
         sx={{
           flexBasis: '75%',
@@ -33,7 +31,7 @@ const CatalogPage = () => {
         }}
       >
         <Search />
-        <RequestsList />
+        {data && <RequestsList data={data} />}
       </Box>
     </Box>
   );
