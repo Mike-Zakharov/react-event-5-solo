@@ -8,7 +8,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import { useAuthContext } from '../context/AuthContext';
 
-
 const AuthPage = () => {
   const navigate = useNavigate();
   const { authenticate, loading, error } = useAuth();
@@ -21,10 +20,9 @@ const AuthPage = () => {
     if (authData) {
       console.log(authData, 'data for auth');
       login(authData.token);
-      navigate('/catalogue');
+      navigate('/catalog');
     }
   };
-
 
   const testProfiles = [
     { username: 'testUser12@test.com', password: 'password12' },
@@ -36,10 +34,9 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (auth) {
-      navigate('/catalogue');
+      navigate('/catalog');
     }
   }, [auth, navigate]);
-
 
   return (
     <>
