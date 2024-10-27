@@ -52,7 +52,7 @@ const HelpRequestPage = () => {
 
   const actionStep = data.actionsSchedule.map((step) => {
     return (
-      <Grid2 size={12}>
+      <Grid2 size={12} key={step.stepLabel}>
         <Typography>
           {step.isDone ? (
             <CheckCircleOutlineIcon color="success" sx={{ mr: '4px' }} />
@@ -179,9 +179,11 @@ const HelpRequestPage = () => {
               В избранное
             </Button>
           </Paper>
+          <ErrorComponent/>
         </Paper>
+        
       ) : (
-        <ErrorComponent/>
+        <p>Page item is not present</p>
       )}
     </>
   );
