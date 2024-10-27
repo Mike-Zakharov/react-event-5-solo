@@ -33,7 +33,7 @@ const CatalogPage = () => {
         }}
       >
         <Search />
-        <RequestsList />
+        <RequestsList variant={'catalog'} />
       </Box>
     </Box>
   );

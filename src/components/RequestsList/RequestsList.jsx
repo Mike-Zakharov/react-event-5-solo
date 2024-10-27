@@ -5,7 +5,7 @@ import {
   Typography,
   Card,
   CardContent,
-  Grid,
+  Grid2 as Grid,
   Pagination,
   CircularProgress,
 } from '@mui/material';
@@ -14,7 +14,8 @@ import RequestCard from '../RequestCard/RequestCard.jsx';
 
 const pageSize = 3;
 
-const RequestsList = () => {
+// variant = "favourites" | "catalog"
+const RequestsList = ({ variant }) => {
   const { data, loading, error } = useFetch('/request');
   console.log(data, 'data ');
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,37 +37,39 @@ const RequestsList = () => {
     <Box
       sx={{
         backgroundColor: 'white',
-        border: '1px solid #E0E0E0',
-        borderRadius: '2px',
-        padding: '20px',
+        border: variant === 'catalog' ? '1px solid #E0E0E0' : 'none',
+        borderRadius: '4px',
+        padding: variant === 'catalog' ? '20px' : 0,
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography
-          variant="h4"
-          component="h2"
-          gutterBottom
+      {variant === 'catalog' && (
+        <Box
           sx={{
-            fontSize: '20px',
-            fontWeight: 600,
-            lineHeight: '32px',
-            letterSpacing: '0.15px',
-            textAlign: 'left',
-            color: 'black',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
-          Найдено {data ? data.length : 0} запросов
-        </Typography>
-        <ToggleButtons />
-      </Box>
+          <Typography
+            variant="h4"
+            component="h2"
+            gutterBottom
+            sx={{
+              fontSize: '20px',
+              fontWeight: 600,
+              lineHeight: '32px',
+              letterSpacing: '0.15px',
+              textAlign: 'left',
+              color: 'black',
+            }}
+          >
+            Найдено {data ? data.length : 0} запросов
+          </Typography>
+          <ToggleButtons />
+        </Box>
+      )}
 
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {data &&
           data
             .slice(0, 3)
