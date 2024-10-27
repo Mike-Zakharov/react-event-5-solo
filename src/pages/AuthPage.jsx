@@ -13,8 +13,6 @@ const AuthPage = () => {
   const { authenticate, loading, error } = useAuth();
   const { login, logout, auth } = useAuthContext();
 
-  console.log(auth, 'auth');
-
   const onSubmit = async (formData) => {
     const authData = await authenticate(formData);
     if (authData) {
