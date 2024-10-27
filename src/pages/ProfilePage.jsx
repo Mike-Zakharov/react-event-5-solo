@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import useFetch from '../hooks/useFetch';
 import { UserInfoCard } from '../components/UserInfoCard/UserInfoCard';
 import { ProfileTabs } from '../components/tabs/ProfileTabs';
@@ -14,15 +14,15 @@ const ProfilePage = () => {
   return (
     <Box component="section">
       <MainContainer>
-        <Box sx={{ pt: '30px', pb: 8, px: 5, backgroundColor: '#F5F5F5' }}>
+        <Paper variant="outlined" sx={{ pt: '30px', pb: 8, px: 5, backgroundColor: '#F5F5F5' }}>
           <Typography variant="h4" component="h1" sx={{ mb: 2.5, textAlign: 'left' }}>
             Мой профиль
           </Typography>
           <Box sx={{ display: 'flex', gap: 2.5 }}>
-            <UserInfoCard />
+            <UserInfoCard userData={data} />
             <ProfileTabs userData={data} />
           </Box>
-        </Box>
+        </Paper>
       </MainContainer>
     </Box>
   );
