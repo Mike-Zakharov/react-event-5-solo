@@ -74,7 +74,7 @@ const AuthForm = ({ onSubmit }) => {
       />
 
       {/* Кнопка входа */}
-      <Button  type="submit" variant="contained" color="primary" fullWidth>
+      <Button type="submit" variant="contained" color="primary" fullWidth>
         Войти
       </Button>
     </Box>

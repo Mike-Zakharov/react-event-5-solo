@@ -12,18 +12,6 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 
-const card = {
-  image: 'src/assets/image-card.svg',
-  title: 'Сбор средств для пенсионерки Ангелины Ивановны',
-  organization: 'Фонд помощи для ветеранов и инвалидов "Вера"',
-  location: 'Область: Владимирская Населенный пункт: Владимир',
-  goalDescription: 'Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на...',
-  endingDate: '20.03.2025',
-  requestGoalCurrentValue: 1102563,
-  requestGoal: 2056489,
-  contributorsCount: 3566987,
-};
-
 const titleStyles = {
   fontWeight: 500,
   fontSize: '14px',
@@ -47,72 +35,109 @@ const captionStyle = {
   color: 'rgba(0, 0, 0, 0.6)',
 };
 
-const RequestCard = () => {
+// variant = "full" | "short"
+const RequestCard = ({
+  variant,
+  image,
+  title,
+  organization,
+  location,
+  goalDescription,
+  endingDate,
+  requestGoalCurrentValue,
+  requestGoal,
+  contributorsCount,
+}) => {
   const [favorite, setFavorite] = useState(false);
   const handleFavorite = () => {
     setFavorite(!favorite);
   };
 
   return (
-    <Card sx={{ width: 320, height: 843, borderRadius: '4px' }}>
-      <CardMedia
-        sx={{ objectFit: 'contain' }}
-        component="img"
-        height="220"
-        image={card.image}
-        alt="frontend"
-      />
-      <CardHeader
-        align="left"
-        action={
-          <IconButton
-            sx={{
-              border: '1px solid rgba(0, 0, 0, 0.12)',
-              borderRadius: '4px',
-              padding: '4px',
-              width: '32px',
-              height: '32px',
-            }}
-            aria-label="favorites"
-            onClick={handleFavorite}
-          >
-            {favorite ? <StarIcon /> : <StarBorderIcon />}
-          </IconButton>
-        }
-        title={card.title}
-      />
+    <Card sx={{ width: 320, borderRadius: '4px' }}>
+      {variant === 'full' && (
+        <>
+          <CardMedia
+            sx={{ objectFit: 'contain' }}
+            component="img"
+            height="220"
+            image={image}
+            alt="frontend"
+          />
+          <CardHeader
+            align="left"
+            action={
+              <IconButton
+                sx={{
+                  border: '1px solid rgba(0, 0, 0, 0.12)',
+                  borderRadius: '4px',
+                  padding: '4px',
+                  width: '32px',
+                  height: '32px',
+                }}
+                aria-label="favorites"
+                onClick={handleFavorite}
+              >
+                {favorite ? <StarIcon /> : <StarBorderIcon />}
+              </IconButton>
+            }
+            title={title}
+          />
+        </>
+      )}
+
+      {variant === 'short' && (
+        <Typography variant="h6" sx={{ mb: '10px', p: '20px 16px 0' }}>
+          Вместе для добрых дел
+        </Typography>
+      )}
+
       <CardContent sx={{ padding: '0' }}>
-        <Box sx={{ height: 402, padding: '10px 16px 20px 16px' }}>
-          <Box sx={{ marginBottom: '20px' }}>
-            <Typography align="left" sx={titleStyles}>
-              Организатор
-            </Typography>
-            <Typography align="left" sx={contentStyles}>
-              {card.organization}
-            </Typography>
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <Typography align="left" sx={titleStyles}>
-              Локация
-            </Typography>
-            <Typography align="left" sx={contentStyles}>
-              {card.location}
-            </Typography>
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2.5,
+            padding: '10px 16px 20px 16px',
+          }}
+        >
+          {variant === 'full' && (
+            <>
+              <Box>
+                <Typography align="left" sx={titleStyles}>
+                  Организатор
+                </Typography>
+                <Typography align="left" sx={contentStyles}>
+                  {organization}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography align="left" sx={titleStyles}>
+                  Локация
+                </Typography>
+                <Typography align="left" sx={contentStyles}>
+                  {location?.district || ''}
+                  <br />
+                  {location?.city || ''}
+                </Typography>
+              </Box>
+            </>
+          )}
+
+          <Box>
             <Typography align="left" sx={titleStyles}>
               Цель сбора
             </Typography>
             <Typography align="left" sx={contentStyles}>
-              {card.goalDescription}
+              {goalDescription}
             </Typography>
           </Box>
-          <Box sx={{ marginBottom: '20px' }}>
+          <Box>
             <Typography align="left" sx={titleStyles}>
               Завершение
             </Typography>
             <Typography align="left" sx={contentStyles}>
-              {card.endingDate}
+              {endingDate}
             </Typography>
           </Box>
           <Box fontSize="0">
@@ -136,9 +161,9 @@ const RequestCard = () => {
               disabled={true}
               aria-label="Small"
               valueLabelDisplay="auto"
-              defaultValue={card.requestGoalCurrentValue}
+              defaultValue={requestGoalCurrentValue}
               min={0}
-              max={card.requestGoal}
+              max={requestGoal}
             />
             <Box
               sx={{
@@ -148,8 +173,8 @@ const RequestCard = () => {
                 marginTop: '4px',
               }}
             >
-              <Typography sx={captionStyle}>{card.requestGoalCurrentValue} руб</Typography>
-              <Typography sx={captionStyle}>{card.requestGoal} руб</Typography>
+              <Typography sx={captionStyle}>{requestGoalCurrentValue} руб</Typography>
+              <Typography sx={captionStyle}>{requestGoal} руб</Typography>
             </Box>
           </Box>
         </Box>
@@ -160,16 +185,16 @@ const RequestCard = () => {
           }}
         >
           <Typography align="left" sx={captionStyle}>
-            Нас уже: {card.contributorsCount}
+            Нас уже: {contributorsCount}
           </Typography>
           <Button
             variant="contained"
+            size="large"
             sx={{
               borderRadius: '4px',
               padding: '8px 24px',
-              width: 288,
-              height: 42,
               marginTop: '10px',
+              width: '100%',
             }}
           >
             Помочь
