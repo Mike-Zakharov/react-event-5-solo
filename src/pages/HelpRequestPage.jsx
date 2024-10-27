@@ -4,7 +4,7 @@ import { Box, Button, Grid2, Icon, Paper, Typography } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ErrorComponent from '../components/ErrorConponent/ErrorComponent';
+
 
 const data = {
   id: 'request-id-1',
@@ -179,7 +179,7 @@ const HelpRequestPage = () => {
               В избранное
             </Button>
           </Paper>
-          <ErrorComponent/>
+
         </Paper>
         
       ) : (
