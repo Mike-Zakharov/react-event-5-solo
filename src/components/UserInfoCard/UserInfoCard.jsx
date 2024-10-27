@@ -39,7 +39,10 @@ export const UserInfoCard = ({ userData }) => {
           <Typography variant="h6" sx={{ mb: '10px' }}>
             {`${userData?.name} ${userData?.lastName}`}
           </Typography>
-          <Typography variant="body2">{`Статус: ${userData?.status}`}</Typography>
+          <Box sx={{ display: 'flex', gap: 0.5 }}>
+            <Typography variant="subtitle2">Статус:</Typography>
+            <Typography variant="body2">{userData?.status}</Typography>
+          </Box>
         </CardContent>
         <CardActions sx={{ p: 2.5 }}>
           <Button

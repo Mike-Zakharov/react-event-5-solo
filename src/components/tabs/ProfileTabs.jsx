@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Paper,
   Tab,
   Tabs,
   Typography,
@@ -63,8 +64,8 @@ export const ProfileTabs = ({ userData }) => {
   };
 
   return (
-    <Box sx={{ flex: '0 1 80%', p: 4.5, backgroundColor: '#fff' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Paper variant="outlined" sx={{ flex: '0 1 80%', p: '10px 36px 40px' }}>
+      <Box sx={{ mb: '30px', borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Личные данные" {...a11yProps(0)} />
           <Tab label="Контакты" {...a11yProps(1)} />
@@ -250,6 +251,6 @@ export const ProfileTabs = ({ userData }) => {
       <ProfilePanel value={value} index={2}>
         Избранное
       </ProfilePanel>
-    </Box>
+    </Paper>
   );
 };

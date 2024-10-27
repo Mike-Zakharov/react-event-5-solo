@@ -7,9 +7,10 @@ export const ProfilePanel = ({ value, index, children, ...rest }) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      sx={{ display: 'flex', flexDirection: 'column', gap: '30px' }}
       {...rest}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && children}
     </Box>
   );
 };
