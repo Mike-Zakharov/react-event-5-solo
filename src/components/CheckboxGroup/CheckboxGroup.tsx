@@ -2,22 +2,14 @@ import React from 'react';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-<<<<<<< HEAD
-const CheckboxGroup = ({ options, label = 'Name', key }) => {
-=======
 const CheckboxGroup = ({ options, label = 'Name', paramkey }) => {
->>>>>>> 67a30d8936d9d63efc610cce0f4f8499941d79cd
   const navigate = useNavigate();
   const location = useLocation();
 
   console.log(options, 'options');
 
   const query = new URLSearchParams(location.search);
-<<<<<<< HEAD
-  const selectedOptions = query.get(key) ? query.get(key).split(',') : [];
-=======
   const selectedOptions = query.get(paramkey) ? query.get(paramkey).split(',') : [];
->>>>>>> 67a30d8936d9d63efc610cce0f4f8499941d79cd
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -29,11 +21,7 @@ const CheckboxGroup = ({ options, label = 'Name', paramkey }) => {
       updatedOptions = selectedOptions.filter((option) => option !== name);
     }
 
-<<<<<<< HEAD
-    query.set(key, updatedOptions.join(','));
-=======
     query.set(paramkey, updatedOptions.join(','));
->>>>>>> 67a30d8936d9d63efc610cce0f4f8499941d79cd
 
     navigate({ search: query.toString() });
   };
