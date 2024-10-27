@@ -1,9 +1,14 @@
+import React from 'react';
 import { AppBar, Box, Button, Link, Toolbar, Typography } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { MainContainer } from '../container/MainContainer';
 import logo from '../../assets/logo.svg';
+import { useAuthContext } from '../../context/AuthContext';
+import AccountMenu from '../AccountMenu/AccountMenu';
 
 export const Header = () => {
+  const { auth } = useAuthContext();
+
   return (
     <AppBar
       position="static"
@@ -21,9 +26,13 @@ export const Header = () => {
             <Typography variant="body1">Запросы о помощи</Typography>
           </Link>
 
-          <Button variant="outlined" size="large" endIcon={<ChevronRightIcon />} color="inherit">
-            Войти
-          </Button>
+          {auth ? (
+            <AccountMenu />
+          ) : (
+            <Button variant="outlined" size="large" endIcon={<ChevronRightIcon />} color="inherit">
+              Войти
+            </Button>
+          )}
         </Toolbar>
       </MainContainer>
     </AppBar>

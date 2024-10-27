@@ -16,6 +16,8 @@ import { ProfilePanel } from '../profile/ProfilePanel';
 import telegramIcon from '../../assets/telegram.svg';
 import vkIcon from '../../assets/vk.svg';
 import whatsappIcon from '../../assets/whatsapp.svg';
+import RequestsList from '../RequestsList/RequestsList';
+import ToggleButtons from '../ToggleButtons/ToggleButtons';
 
 function a11yProps(index) {
   return {
@@ -65,12 +67,25 @@ export const ProfileTabs = ({ userData }) => {
 
   return (
     <Paper variant="outlined" sx={{ flex: '0 1 80%', p: '10px 36px 40px' }}>
-      <Box sx={{ mb: '30px', borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: '30px',
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          sx={{ borderBottom: 1, borderColor: 'divider' }}
+        >
           <Tab label="Личные данные" {...a11yProps(0)} />
           <Tab label="Контакты" {...a11yProps(1)} />
           <Tab label="Избранное" {...a11yProps(2)} />
         </Tabs>
+
+        {value === 2 && <ToggleButtons />}
       </Box>
       <ProfilePanel value={value} index={0}>
         <Box>
@@ -249,7 +264,7 @@ export const ProfileTabs = ({ userData }) => {
       </ProfilePanel>
 
       <ProfilePanel value={value} index={2}>
-        Избранное
+        <RequestsList variant={'favourites'} data={userData?.favouriteRequests} />
       </ProfilePanel>
     </Paper>
   );
