@@ -5,34 +5,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import DatePickerComponent from '../DatePickerComponent/DatePickerComponent';
 import extractUniqueFilters from '../../utils/extractUniqueFilters';
 
-const requests = [
-  {
-    id: 'request-id-1',
-    requesterType: 'person',
-    helpType: 'finance',
-    helperRequirements: {
-      helperType: 'group',
-      isOnline: true,
-      qualification: 'professional',
-    },
-  },
-  {
-    id: 'request-id-2',
-    requesterType: 'organization',
-    helpType: 'donation',
-    helperRequirements: {
-      helperType: 'individual',
-      isOnline: false,
-      qualification: 'amateur',
-    },
-  },
-];
-
 const FilterPanel = ({ data }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { helpType, helperRequirements, requesterType } = extractUniqueFilters(requests);
+  const { helpType, helperRequirements, requesterType } = extractUniqueFilters(data);
 
   const { helperType, isOnline, qualification } = helperRequirements;
   const handleFilterClear = () => {
@@ -67,8 +44,12 @@ const FilterPanel = ({ data }) => {
       </Typography>
 
       <Box>
-        <CheckboxGroup options={requesterType} label="Комy мы помогаем" key={'requesterType'} />
-        <CheckboxGroup options={helpType} label="Чем мы помогаем" key={'helpType'} />
+        <CheckboxGroup
+          options={requesterType}
+          label="Комy мы помогаем"
+          paramkey={'requesterType'}
+        />
+        <CheckboxGroup options={helpType} label="Чем мы помогаем" paramkey={'helpType'} />
       </Box>
 
       <Typography
@@ -79,9 +60,9 @@ const FilterPanel = ({ data }) => {
       </Typography>
 
       <Box sx={{ backgroundColor: '#f0f0f0', padding: '12px 42px' }}>
-        <CheckboxGroup options={qualification} label="Специализация" key={'qualification'} />
-        <CheckboxGroup options={isOnline} label="Формат" key={'isOnline'} />
-        <CheckboxGroup options={helperType} label="Необходимо волонтеров" key={'helperType'} />
+        <CheckboxGroup options={qualification} label="Специализация" paramkey={'qualification'} />
+        <CheckboxGroup options={isOnline} label="Формат" paramkey={'isOnline'} />
+        <CheckboxGroup options={helperType} label="Необходимо волонтеров" paramkey={'helperType'} />
       </Box>
 
       <DatePickerComponent />
