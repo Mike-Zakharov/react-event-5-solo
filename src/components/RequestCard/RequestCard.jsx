@@ -12,18 +12,6 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 
-const card = {
-  image: 'src/assets/image-card.svg',
-  title: 'Сбор средств для пенсионерки Ангелины Ивановны',
-  organization: 'Фонд помощи для ветеранов и инвалидов "Вера"',
-  location: 'Область: Владимирская Населенный пункт: Владимир',
-  goalDescription: 'Оплатить лечение МКБ в клинике "Здоровье". Купить одежду на...',
-  endingDate: '20.03.2025',
-  requestGoalCurrentValue: 1102563,
-  requestGoal: 2056489,
-  contributorsCount: 3566987,
-};
-
 const titleStyles = {
   fontWeight: 500,
   fontSize: '14px',
@@ -48,7 +36,18 @@ const captionStyle = {
 };
 
 // variant = "full" | "short"
-const RequestCard = ({ variant }) => {
+const RequestCard = ({
+  variant,
+  image,
+  title,
+  organization,
+  location,
+  goalDescription,
+  endingDate,
+  requestGoalCurrentValue,
+  requestGoal,
+  contributorsCount,
+}) => {
   const [favorite, setFavorite] = useState(false);
   const handleFavorite = () => {
     setFavorite(!favorite);
@@ -62,7 +61,7 @@ const RequestCard = ({ variant }) => {
             sx={{ objectFit: 'contain' }}
             component="img"
             height="220"
-            image={card.image}
+            image={image}
             alt="frontend"
           />
           <CardHeader
@@ -82,7 +81,7 @@ const RequestCard = ({ variant }) => {
                 {favorite ? <StarIcon /> : <StarBorderIcon />}
               </IconButton>
             }
-            title={card.title}
+            title={title}
           />
         </>
       )}
@@ -109,7 +108,7 @@ const RequestCard = ({ variant }) => {
                   Организатор
                 </Typography>
                 <Typography align="left" sx={contentStyles}>
-                  {card.organization}
+                  {organization}
                 </Typography>
               </Box>
               <Box>
@@ -117,7 +116,9 @@ const RequestCard = ({ variant }) => {
                   Локация
                 </Typography>
                 <Typography align="left" sx={contentStyles}>
-                  {card.location}
+                  {location?.district || ''}
+                  <br />
+                  {location?.city || ''}
                 </Typography>
               </Box>
             </>
@@ -128,7 +129,7 @@ const RequestCard = ({ variant }) => {
               Цель сбора
             </Typography>
             <Typography align="left" sx={contentStyles}>
-              {card.goalDescription}
+              {goalDescription}
             </Typography>
           </Box>
           <Box>
@@ -136,7 +137,7 @@ const RequestCard = ({ variant }) => {
               Завершение
             </Typography>
             <Typography align="left" sx={contentStyles}>
-              {card.endingDate}
+              {endingDate}
             </Typography>
           </Box>
           <Box fontSize="0">
@@ -160,9 +161,9 @@ const RequestCard = ({ variant }) => {
               disabled={true}
               aria-label="Small"
               valueLabelDisplay="auto"
-              defaultValue={card.requestGoalCurrentValue}
+              defaultValue={requestGoalCurrentValue}
               min={0}
-              max={card.requestGoal}
+              max={requestGoal}
             />
             <Box
               sx={{
@@ -172,8 +173,8 @@ const RequestCard = ({ variant }) => {
                 marginTop: '4px',
               }}
             >
-              <Typography sx={captionStyle}>{card.requestGoalCurrentValue} руб</Typography>
-              <Typography sx={captionStyle}>{card.requestGoal} руб</Typography>
+              <Typography sx={captionStyle}>{requestGoalCurrentValue} руб</Typography>
+              <Typography sx={captionStyle}>{requestGoal} руб</Typography>
             </Box>
           </Box>
         </Box>
@@ -184,7 +185,7 @@ const RequestCard = ({ variant }) => {
           }}
         >
           <Typography align="left" sx={captionStyle}>
-            Нас уже: {card.contributorsCount}
+            Нас уже: {contributorsCount}
           </Typography>
           <Button
             variant="contained"
