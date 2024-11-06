@@ -1,28 +1,14 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import AuthForm from '../components/AuthForm/AuthForm';
 import useAuth from '../hooks/useAuth';
 
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-import { useAuthContext } from '../context/AuthContext';
+
 
 const AuthPage = () => {
-  const navigate = useNavigate();
-  const { authenticate, loading, error } = useAuth();
-  const { login, logout, auth } = useAuthContext();
-
-  const onSubmit = async (formData) => {
-    const authData = await authenticate(formData);
-    if (authData) {
-      console.log(authData.auth, authData.token);
-
-      console.log(authData, 'data for auth');
-      login(authData.token);
-      navigate('/catalog');
-    }
-  };
+  const { loading, error } = useAuth();
 
   const testProfiles = [
     { username: 'testUser12@test.com', password: 'password12' },
@@ -31,12 +17,6 @@ const AuthPage = () => {
   ];
 
   const userLabels = ['Первый пользователь', 'Второй пользователь', 'Третий пользователь'];
-
-  useEffect(() => {
-    if (auth) {
-      navigate('/catalog');
-    }
-  }, [auth, navigate]);
 
   return (
     <>
@@ -62,7 +42,7 @@ const AuthPage = () => {
               Авторизация
             </Typography>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <AuthForm onSubmit={onSubmit} />
+            <AuthForm />
             {loading && <p>Авторизация...</p>}
           </Box>
         </Grid>
