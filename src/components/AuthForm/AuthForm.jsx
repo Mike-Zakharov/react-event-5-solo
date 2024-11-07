@@ -15,8 +15,8 @@ const AuthForm = ({ testProfiles }) => {
     setError,
   } = useForm();
 
-  const { authenticate, loading, error } = useAuth();
-  const { login, logout, auth } = useAuthContext();
+  const { authenticate } = useAuth();
+  const { login, auth } = useAuthContext();
 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -25,15 +25,11 @@ const AuthForm = ({ testProfiles }) => {
   };
 
   const handleFormSubmit = async (formData) => {
-    // Проверка данных против тестовых профилей перед вызовом API
-    console.log('formData', formData)
     const isTestProfile = testProfiles.some(
       (profile) => profile.login === formData.login && profile.password === formData.password,
     );
-    console.log('isTestProfile:' ,isTestProfile)
 
     if (!isTestProfile) {
-      // Установка ошибок на поля при некорректных логине и/или пароле
       setError('login', { type: 'manual', message: 'Неверный логин или пароль' });
       setError('password', { type: 'manual', message: 'Неверный логин или пароль' });
       return;
@@ -43,7 +39,7 @@ const AuthForm = ({ testProfiles }) => {
     const result = await authenticate(formData);
     if (result) {
       toast.success('Успешная авторизация!', { theme: 'colored', autoClose: 2000 }); // Уведомление об успешной авторизации
-      login(result.token); // Вход через контекст
+      login(result.token);
       navigate('/catalog');
     } else {
       toast.error('Ошибка! Попробуйте еще раз', { theme: 'colored', autoClose: 3000 }); // Уведомление об ошибке
@@ -77,7 +73,6 @@ const AuthForm = ({ testProfiles }) => {
         Вход
       </Typography>
 
-      {/* Поле для логина */}
       <TextField
         label="Логин"
         variant="outlined"
@@ -95,7 +90,6 @@ const AuthForm = ({ testProfiles }) => {
         fullWidth
       />
 
-      {/* Поле для пароля с кнопкой "глазок" */}
       <TextField
         label="Пароль"
         variant="outlined"
@@ -117,7 +111,6 @@ const AuthForm = ({ testProfiles }) => {
         }}
       />
 
-      {/* Кнопка входа */}
       <Button type="submit" variant="contained" color="primary" fullWidth>
         Войти
       </Button>
