@@ -9,6 +9,8 @@ import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 import { MainContainer } from './components/container/MainContainer.jsx';
+import { ToastContainer } from 'react-toastify';
+
 function App() {
   return (
     <AuthContextProvider>
@@ -52,6 +54,7 @@ function App() {
           </Routes>
         </MainContainer>
         <Footer />
+        <ToastContainer position="bottom-right" />
       </BrowserRouter>
     </AuthContextProvider>
   );
