@@ -4,18 +4,10 @@ import useAuth from '../hooks/useAuth';
 
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
+import { testProfiles, userLabels } from '../components/AuthForm';
 
 const AuthPage = () => {
   const { loading, error } = useAuth();
-
-  const testProfiles = [
-    { login: 'testUser12@test.com', password: 'password12' },
-    { login: 'testUser13@test.com', password: 'password13' },
-    { login: 'testUser14@test.com', password: 'password14' },
-  ];
-
-  const userLabels = ['Первый пользователь', 'Второй пользователь', 'Третий пользователь'];
 
   return (
     <Box>
