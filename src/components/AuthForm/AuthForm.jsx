@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, Box, Typography, IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import AuthNotification from '../AuthNotification';
 import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
-
+import { toast } from 'react-toastify';
 
 const AuthForm = () => {
   const {
@@ -15,47 +14,23 @@ const AuthForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { authenticate, loading, error } = useAuth(); // Получаем authenticate, loading, error
+  const { authenticate, loading, error } = useAuth();
   const { login, logout, auth } = useAuthContext();
 
-  const navigate = useNavigate(); // Инициализируем навигацию
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  // Состояние для уведомления
-  const [notification, setNotification] = useState({
-    open: false,
-    message: '',
-    severity: 'success', // or 'error'
-  });
-
-  const handleCloseNotification = () => {
-    setNotification((prev) => ({ ...prev, open: false }));
-  };
-
-  // Обертка для handleSubmit, чтобы обрабатывать уведомления
   const handleFormSubmit = async (formData) => {
     const result = await authenticate(formData);
     if (result) {
-      setNotification({
-        open: true,
-        message: 'Успешная авторизация!',
-        severity: 'success',
-      });
-        // Устанавливаем тайм-аут, чтобы переход был через 2 секунды после отображения уведомления
-    setTimeout(() => {
-      // Переход на страницу после паузы
-      login(result.token);  // Вход через контекст
+      toast.success('Успешная авторизация!', { theme: 'colored', autoClose: 2000 }); // Уведомление об успешной авторизации
+      login(result.token); // Вход через контекст
       navigate('/catalog');
-    }, 2000);  // Пауза 2 секунды 
     } else {
-      setNotification({
-        open: true,
-        message: error || 'Ошибка авторизации',
-        severity: 'error',
-      });
+      toast.error('Ошибка! Попробуйте еще раз', { theme: 'colored', autoClose: 3000 }); // Уведомление об ошибке
     }
   };
 
@@ -64,9 +39,6 @@ const AuthForm = () => {
       navigate('/catalog');
     }
   }, [auth, navigate]);
-
-
-
 
   return (
     <Box
@@ -133,14 +105,6 @@ const AuthForm = () => {
       <Button type="submit" variant="contained" color="primary" fullWidth>
         Войти
       </Button>
-
-      {/* Компонент уведомления */}
-      <AuthNotification
-        open={notification.open}
-        message={notification.message}
-        severity={notification.severity}
-        onClose={handleCloseNotification}
-      />
     </Box>
   );
 };

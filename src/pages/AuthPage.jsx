@@ -6,7 +6,6 @@ import { Box, Typography, Grid, Paper } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 
-
 const AuthPage = () => {
   const { loading, error } = useAuth();
 
@@ -19,7 +18,7 @@ const AuthPage = () => {
   const userLabels = ['Первый пользователь', 'Второй пользователь', 'Третий пользователь'];
 
   return (
-    <>
+    <Box>
       <Grid container sx={{ height: '100vh' }}>
         {/* Левая часть - Авторизация */}
         <Grid
@@ -42,6 +41,7 @@ const AuthPage = () => {
               Авторизация
             </Typography>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            {/* Размещаем контейнер для уведомлений */}
             <AuthForm />
             {loading && <p>Авторизация...</p>}
           </Box>
@@ -96,7 +96,7 @@ const AuthPage = () => {
           ))}
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 };
 
