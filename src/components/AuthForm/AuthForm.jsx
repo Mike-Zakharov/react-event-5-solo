@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
-const AuthForm = () => {
+const AuthForm = ({ testProfiles }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
 
   const { authenticate, loading, error } = useAuth();
@@ -24,6 +25,21 @@ const AuthForm = () => {
   };
 
   const handleFormSubmit = async (formData) => {
+    // Проверка данных против тестовых профилей перед вызовом API
+    console.log('formData', formData)
+    const isTestProfile = testProfiles.some(
+      (profile) => profile.login === formData.login && profile.password === formData.password,
+    );
+    console.log('isTestProfile:' ,isTestProfile)
+
+    if (!isTestProfile) {
+      // Установка ошибок на поля при некорректных логине и/или пароле
+      setError('login', { type: 'manual', message: 'Неверный логин или пароль' });
+      setError('password', { type: 'manual', message: 'Неверный логин или пароль' });
+      return;
+    }
+
+
     const result = await authenticate(formData);
     if (result) {
       toast.success('Успешная авторизация!', { theme: 'colored', autoClose: 2000 }); // Уведомление об успешной авторизации

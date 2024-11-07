@@ -10,9 +10,9 @@ const AuthPage = () => {
   const { loading, error } = useAuth();
 
   const testProfiles = [
-    { username: 'testUser12@test.com', password: 'password12' },
-    { username: 'testUser13@test.com', password: 'password13' },
-    { username: 'testUser14@test.com', password: 'password14' },
+    { login: 'testUser12@test.com', password: 'password12' },
+    { login: 'testUser13@test.com', password: 'password13' },
+    { login: 'testUser14@test.com', password: 'password14' },
   ];
 
   const userLabels = ['Первый пользователь', 'Второй пользователь', 'Третий пользователь'];
@@ -42,7 +42,7 @@ const AuthPage = () => {
             </Typography>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {/* Размещаем контейнер для уведомлений */}
-            <AuthForm />
+            <AuthForm  testProfiles={testProfiles} />
             {loading && <p>Авторизация...</p>}
           </Box>
         </Grid>
@@ -86,7 +86,7 @@ const AuthPage = () => {
               <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 4 }}>
                 {' '}
                 <Typography variant="body2" color="#014361">
-                  Логин: {profile.username}
+                  Логин: {profile.login}
                 </Typography>
                 <Typography variant="body2" color="#014361">
                   Пароль: {profile.password}
