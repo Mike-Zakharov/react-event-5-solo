@@ -14,6 +14,7 @@ import '@fontsource/roboto/500.css';
 import App from './App.jsx';
 import './index.css';
 import { grey } from '@mui/material/colors';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = createTheme({
   typography: {

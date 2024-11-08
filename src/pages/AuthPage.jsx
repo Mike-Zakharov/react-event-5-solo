@@ -1,45 +1,16 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import AuthForm from '../components/AuthForm/AuthForm';
 import useAuth from '../hooks/useAuth';
 
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-
-import { useAuthContext } from '../context/AuthContext';
+import { testProfiles, userLabels } from '../components/AuthForm';
 
 const AuthPage = () => {
-  const navigate = useNavigate();
-  const { authenticate, loading, error } = useAuth();
-  const { login, logout, auth } = useAuthContext();
-
-  const onSubmit = async (formData) => {
-    const authData = await authenticate(formData);
-    if (authData) {
-      console.log(authData.auth, authData.token);
-
-      console.log(authData, 'data for auth');
-      login(authData.token);
-      navigate('/catalog');
-    }
-  };
-
-  const testProfiles = [
-    { username: 'testUser12@test.com', password: 'password12' },
-    { username: 'testUser13@test.com', password: 'password13' },
-    { username: 'testUser14@test.com', password: 'password14' },
-  ];
-
-  const userLabels = ['Первый пользователь', 'Второй пользователь', 'Третий пользователь'];
-
-  useEffect(() => {
-    if (auth) {
-      navigate('/catalog');
-    }
-  }, [auth, navigate]);
+  const { loading, error } = useAuth();
 
   return (
-    <>
+    <Box>
       <Grid container sx={{ height: '100vh' }}>
         {/* Левая часть - Авторизация */}
         <Grid
@@ -62,7 +33,8 @@ const AuthPage = () => {
               Авторизация
             </Typography>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <AuthForm onSubmit={onSubmit} />
+            {/* Размещаем контейнер для уведомлений */}
+            <AuthForm  testProfiles={testProfiles} />
             {loading && <p>Авторизация...</p>}
           </Box>
         </Grid>
@@ -106,7 +78,7 @@ const AuthPage = () => {
               <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: 4 }}>
                 {' '}
                 <Typography variant="body2" color="#014361">
-                  Логин: {profile.username}
+                  Логин: {profile.login}
                 </Typography>
                 <Typography variant="body2" color="#014361">
                   Пароль: {profile.password}
@@ -116,7 +88,7 @@ const AuthPage = () => {
           ))}
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 };
 

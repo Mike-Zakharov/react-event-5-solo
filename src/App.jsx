@@ -3,6 +3,7 @@ import { Header } from './components/header/Header.jsx';
 import { Footer } from './components/footer/Footer.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 import { MainContainer } from './components/container/MainContainer.jsx';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Outlet />
       </MainContainer>
       <Footer />
+      <ToastContainer position="bottom-right" />
     </AuthContextProvider>
   );
 }
