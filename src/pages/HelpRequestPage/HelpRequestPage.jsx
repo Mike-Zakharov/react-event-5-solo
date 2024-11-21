@@ -13,11 +13,18 @@ import FavoritesBtn from './Components/FavoritesBtn';
 import Header from './Components/Header';
 import { useTheme } from '@mui/material/styles';
 import useFetch from '../../hooks/useFetch';
+import ErrorComponent from '../../components/ErrorConponent/ErrorComponent';
 
 const HelpRequestPage = () => {
   const { itemId } = useParams();
   const theme = useTheme();
-  const { data, loading, error } = useFetch(`/request/${itemId}`);
+  const { data } = useFetch(`/request/${itemId}`);
+
+  const containerStyles = {
+    padding: '30px 40px 64px 40px',
+    backgroundColor: theme.palette.background.primary,
+    borderRadius: 0
+  };
 
   const wrapperStyles = {
     display: 'flex',
@@ -28,16 +35,19 @@ const HelpRequestPage = () => {
     padding: '40px 36px',
   };
 
+  const errorWrapperStyles = { 
+    maxWidth: '1420px', 
+    height: '1318px', 
+    padding: '276px 0 280px 0',
+    backgroundColor: '#fff',
+    marginTop: '30px',
+  }
+
   return (
     <Box>
-      {data ? (
-        <Paper
-          sx={{
-            padding: '30px 40px 64px 40px',
-            backgroundColor: theme.palette.background.primary,
-          }}
-        >
-          <Header />
+      <Paper sx={containerStyles} >
+        <Header />
+        {data ? (
           <Paper sx={wrapperStyles}>
             <Grid2 container rowSpacing="30px" sx={{ width: '550px' }}>
               <Title data={data} />
@@ -51,10 +61,12 @@ const HelpRequestPage = () => {
             </Grid2>
             <FavoritesBtn />
           </Paper>
-        </Paper>
-      ) : (
-        <p>Page item is not present</p>
-      )}
+        ) : (
+          <Box sx={errorWrapperStyles}>
+            <ErrorComponent/>
+          </Box>
+        )}
+      </Paper>
     </Box>
   );
 };

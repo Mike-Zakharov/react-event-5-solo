@@ -80,7 +80,7 @@ const RequestCard = ({
                 aria-label="favorites"
                 onClick={handleFavorite}
               >
-                {favorite ? <StarIcon /> : <StarBorderIcon />}
+                {favorite ? <StarIcon color='success' /> : <StarBorderIcon />}
               </IconButton>
             }
             title={title}

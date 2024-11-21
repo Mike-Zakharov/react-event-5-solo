@@ -1,28 +1,36 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import StarIcon from '@mui/icons-material/Star';
 
 const FavoritesBtn = () => {
-  const [color, setColor] = useState('disabled');
+  const [favorite, setFavorite] = useState(false);
+
+  const iconsStyles = { 
+    marginRight: '8px', 
+    width: '18px', 
+    height: '18px', 
+    verticalAlign: 'middle',
+    color: 'disabled',
+  }
+  const favoriteIconStyles = {...iconsStyles, color: theme.palette.warning.light}
 
   const handleAddFavorites = () => {
-    if (color === 'disabled') {
-      setColor('success');
-    } else if (color === 'success') {
-      setColor('disabled');
-    }
+    setFavorite(!favorite);
   };
+
+  const currentIcon = favorite ? 
+    <StarIcon  sx={favoriteIconStyles} /> 
+    : 
+    <StarOutlineIcon sx={iconsStyles} />
 
   return (
     <Button
       onClick={() => handleAddFavorites()}
       variant="outlined"
-      sx={{ p: '4px 10px', color: 'black' }}
+      sx={{ padding: '4px 10px', color: 'black' }}
     >
-      <StarOutlineIcon
-        color={color}
-        sx={{ mr: '8px', width: '18px', height: '18px', verticalAlign: 'middle' }}
-      />
+      {currentIcon}
       В избранное
     </Button>
   );
