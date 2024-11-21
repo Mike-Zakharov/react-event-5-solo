@@ -1,6 +1,11 @@
-# react-event-5-solo
-React event team 5 project  'volunteer marketplace for help requests'.
+# React Project Hackathon Team 5
+
+React event team 5 project 'volunteer marketplace for help requests'. 
 Completing the project on my own.
+
+## Deploy
+
+- https://react-event-5.pages.dev/catalog
 
 ## Technology Stack
 
