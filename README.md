@@ -1,5 +1,6 @@
 # react-event-5-solo
-React event team 5 project  'volunteer marketplace for help requests'
+React event team 5 project  'volunteer marketplace for help requests'.
+Completing the project on my own.
 
 ## Technology Stack
 
