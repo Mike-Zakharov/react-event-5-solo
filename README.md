@@ -19,7 +19,7 @@ To run the project locally, follow these steps:
    ```
 2. **Navigate to the project directory:**
    ```bash
-   cd react-event-5
+   cd react-event-5-solo
    ```
 3. **Install dependencies:**
    ```bash
